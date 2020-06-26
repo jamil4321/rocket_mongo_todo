@@ -45,7 +45,7 @@ fn make_cors() -> Cors {
 
 
 
-#[get("/")]
+#[get("/",format = "application/json")]
 fn func_get ()->Result<Json<Vec<Todo>>, Error>{
     match all(){
         Ok(res) => Ok(Json(res)),
