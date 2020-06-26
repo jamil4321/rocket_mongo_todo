@@ -1,0 +1,25 @@
+POST http://localhost:8000/add
+Content-Type: application/json
+
+{
+    "item" : "another",
+    "status":false
+}
+
+
+###
+GET http://localhost:8000
+
+
+###
+DELETE  http://localhost:8000/5ef6318b009bcdb900f8cf0e
+
+###
+
+PUT   http://localhost:8000/5ef6319100a6bcf000f8cf0f
+Content-Type: application/json
+
+{
+    "item":"Updated",
+    "status": true
+}
