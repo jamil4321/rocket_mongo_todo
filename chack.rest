@@ -1,8 +1,8 @@
-POST http://localhost:8000/add
+POST http://localhost:8000
 Content-Type: application/json
 
 {
-    "item" : "another",
+    "item" : "todo",
     "status":false
 }
 

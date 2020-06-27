@@ -17,9 +17,7 @@ use mongodb::{bson::{doc,oid::ObjectId},error::Error};
 fn make_cors() -> Cors {
     let allowed_origins = AllowedOrigins::some_exact(&[     
         "http://localhost:3000",
-        "http://localhost:8080",
-        "http://0.0.0.0:8000",
-        "http://mongor3-app.surge.sh",                
+        "http://0.0.0.0:3000",              
     ]);
 
     CorsOptions { 
@@ -54,7 +52,7 @@ fn func_get ()->Result<Json<Vec<Todo>>, Error>{
 }
 
 
-#[post("/add" ,format = "application/json", data = "<todo>")]
+#[post("/" ,format = "application/json", data = "<todo>")]
 fn func_post (todo:Json<Todo>)-> Result<Json<ObjectId>, Error> {
     match insert(todo.into_inner()) {
         Ok(res) => Ok(Json(res)),
