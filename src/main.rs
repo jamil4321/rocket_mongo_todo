@@ -17,7 +17,8 @@ use mongodb::{bson::{doc,oid::ObjectId},error::Error};
 fn make_cors() -> Cors {
     let allowed_origins = AllowedOrigins::some_exact(&[     
         "http://localhost:8080",
-        "http://0.0.0.0:8080",              
+        "http://0.0.0.0:8080",
+        "http://rust-react-todo-app.surge.sh/"             
     ]);
 
     CorsOptions { 
