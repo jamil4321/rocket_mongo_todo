@@ -1,4 +1,3 @@
-
 use mongodb::{
     sync::{
         Client, 
@@ -39,17 +38,21 @@ impl InsertableTodo{
     }
 }
 
+// collection Name
 const TODO:&str = "todo_item";
 
+// Mongo DB Conection
 fn mongo_connection(coll:&str)->Result<Collection, Error>{
-    //let client = Client::with_uri_str("mongodb://localhost:27017")?;
+    // let client = Client::with_uri_str("mongodb://localhost:27017")?;
     //let client = Client::with_uri_str("mongodb+srv://monodbUser:abc@myfisrtlerningapp-zbcua.mongodb.net/<dbname>?retryWrites=true&w=majority")?;
-    let client = Client::with_uri_str("mongodb://ubysak1nxbrx6pllwqze:ZFLMw1swQ4KfqBG3OqF4@bnrn7mx78ld977k-mongodb.services.clever-cloud.com:27017/bnrn7mx78ld977k");
+    let client = Client::with_uri_str("mongodb://ubysak1nxbrx6pllwqze:ZFLMw1swQ4KfqBG3OqF4@bnrn7mx78ld977k-mongodb.services.clever-cloud.com:27017/bnrn7mx78ld977k")?;
     let db = client.database("todo");
     let collection = db.collection(coll);
     Ok(collection)
 }
 
+
+// GET Collection 
 fn doc_coll(coll_name:&str)->Collection{
     let collection = match mongo_connection(coll_name){
         Ok(coll) => coll,
@@ -57,9 +60,15 @@ fn doc_coll(coll_name:&str)->Collection{
     };
     collection
 }
+
+
+
+// Get All Data
 pub fn all()->Result<Vec<Todo>,Error>{
     let collection = doc_coll(TODO);
     let cursor = collection.find(None, None).unwrap();
+
+
     cursor.map(|result|match result{
         
     Ok(doc) => match bson::from_bson(Document(doc)) {
@@ -72,6 +81,7 @@ pub fn all()->Result<Vec<Todo>,Error>{
 }
 
 
+// Insert One Record
 pub fn insert(todo:Todo)->Result<ObjectId,Error>{
 
     let collection = doc_coll(TODO);
@@ -90,9 +100,9 @@ pub fn insert(todo:Todo)->Result<ObjectId,Error>{
                     Err(err) => Err(err)
                 }
             }
-            _ => panic!("Not insted")
+            _ => panic!("Not inserted")
         },
-        Err(_) => panic!("Not Found !!! or inserrted")
+        Err(_) => panic!("Not Found !!! or inserted")
     }
 }
 
@@ -107,7 +117,7 @@ pub fn update_collection(id: ObjectId, todo: Todo) -> Result<Todo, Error> {
     new_todo.id = Some(id.clone());
     match bson::to_bson(&new_todo) {
         Ok(model_bson) => match model_bson {
-            bson::Bson::Document(model_doc) => {
+            Document(model_doc) => {
                 match collection.replace_one(doc! {"_id": id}, model_doc, None)
                 {
                     Ok(_) => Ok(new_todo),

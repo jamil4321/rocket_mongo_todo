@@ -1,25 +1,23 @@
-POST http://localhost:8000
-Content-Type: application/json
+GET http://localhost:8000
+
+###
+
+POST http://localhost:8000/add
+Content-Type:  application/json
 
 {
-    "item" : "todo",
-    "status":false
+    "item": "Third Item",
+    "status": false
 }
 
+###
+DELETE http://localhost:8000/5ef860a90057dc7d009eadff
 
 ###
-GET http://app-52321a87-f8a8-4868-b4c8-aa737d4db5f9.cleverapps.io/
-
-
-###
-DELETE  http://localhost:8000/5ef6318b009bcdb900f8cf0e
-
-###
-
-PUT   http://localhost:8000/5ef6319100a6bcf000f8cf0f
-Content-Type: application/json
+PUT http://localhost:8000/5ef860b900c4bd40009eae00
+Content-Type:  application/json
 
 {
-    "item":"Updated",
-    "status": true
+    "item": "New Item",
+    "status": false
 }
