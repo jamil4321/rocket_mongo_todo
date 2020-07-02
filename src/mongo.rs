@@ -44,8 +44,8 @@ const TODO:&str = "todo_item";
 // Mongo DB Conection
 fn mongo_connection(coll:&str)->Result<Collection, Error>{
     // let client = Client::with_uri_str("mongodb://localhost:27017")?;
-    //let client = Client::with_uri_str("mongodb+srv://monodbUser:abc@myfisrtlerningapp-zbcua.mongodb.net/<dbname>?retryWrites=true&w=majority")?;
-    let client = Client::with_uri_str("mongodb://ubysak1nxbrx6pllwqze:ZFLMw1swQ4KfqBG3OqF4@bnrn7mx78ld977k-mongodb.services.clever-cloud.com:27017/bnrn7mx78ld977k")?;
+    let client = Client::with_uri_str("mongodb+srv://monodbUser:abc@myfisrtlerningapp-zbcua.mongodb.net/<dbname>?retryWrites=true&w=majority")?;
+    // let client = Client::with_uri_str("mongodb://ubysak1nxbrx6pllwqze:ZFLMw1swQ4KfqBG3OqF4@bnrn7mx78ld977k-mongodb.services.clever-cloud.com:27017/bnrn7mx78ld977k")?;
     let db = client.database("bnrn7mx78ld977k");
     let collection = db.collection(coll);
     Ok(collection)
